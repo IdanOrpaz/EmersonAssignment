@@ -11,7 +11,7 @@ router = APIRouter()
 analysis_flow_handle = AnalysisFlowHandler(get_predefined_flows()) 
 
 
-@router.get("/", response_model=List[str])
+@router.get("/analyze", response_model=List[str])
 def analyze(data_source_name: str, analysis_flow_id: int = None) -> List[str]:
     
     if data_source_name == "Stackoverflow":
@@ -21,6 +21,9 @@ def analyze(data_source_name: str, analysis_flow_id: int = None) -> List[str]:
     else:
         return ["Invalid data source name, data source name doesn't exist."]
     
+    if data == ["Could not fetch data"]: 
+        return data
+    
     if analysis_flow_id is not None:
         if not analysis_flow_handle.exists(analysis_flow_id):
             data =  ["Invalid analysis flow ID, analysis flow ID doesn't exist."]
@@ -28,5 +31,5 @@ def analyze(data_source_name: str, analysis_flow_id: int = None) -> List[str]:
             data = analysis_flow_handle.apply(analysis_flow_id, data)
 
     return data
-
+ 
 

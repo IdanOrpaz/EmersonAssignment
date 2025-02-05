@@ -9,4 +9,4 @@ def fetch_data(url: str) -> Any:
         return response.json()
     except requests.RequestException as e:
         print(f"Error fetching data from {url}: {e}")
-        return None
+        return ["Could not fetch data"]
