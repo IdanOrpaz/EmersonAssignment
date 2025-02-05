@@ -41,6 +41,5 @@ class AnalysisFlowHandler:
         
         return processed_data
     
-    
     def exists(self, analysis_flow_id: int) -> bool:
         return analysis_flow_id in self.analysis_flows
