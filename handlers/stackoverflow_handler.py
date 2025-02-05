@@ -6,6 +6,8 @@ def fetch_stackoverflow_data() -> List[str]:
     url = "https://api.stackexchange.com/2.2/tags/highcharts/faq?site=stackoverflow"
     data = fetch_data(url)
 
+    if data == ["Could not fetch data"]: 
+        return data
     if not data or "items" not in data:
         return []
 
